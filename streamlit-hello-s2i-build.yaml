@@ -1,0 +1,20 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: streamlit-hello-s2i-build
+spec:
+  source:
+    type: Git
+    git:
+      uri: https://github.com/Starias22/streamlit-hello-s2i  # Your repository URL
+  strategy:
+    type: Source # Source 2 Image
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        name: streamlit:test  # Python S2I builder image
+  output:
+    to:
+      kind: ImageStreamTag
+      name: streamlit-hello-s2i:latest
+  triggers: []  # Disable automatic triggers
